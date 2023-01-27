@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/ci-*  
+      - main 
     paths:
       - .github/workflows/**
       - docs/** 
@@ -17,11 +18,11 @@ jobs:
 
       - name: Create gh-pages-dir
         run: |
-          mkdir -p ./public/
+          mkdir -p ./public
 
       - name: copy file
         run: |
-          cp ./documents/index.html ./public/index.html
+          cp ./docs/index.html ./public/index.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
