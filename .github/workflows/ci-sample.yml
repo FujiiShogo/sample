@@ -21,7 +21,7 @@ jobs:
 
       - name: copy file
         run: |
-          cp ./documents/index.html ./public/publish
+          cp ./documents/index.html ./public/index.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
