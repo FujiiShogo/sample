@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/ci-*  
+      - main 
     paths:
       - .github/workflows/**
       - docs/** 
