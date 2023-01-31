@@ -15,6 +15,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
+      - name: install packages
+        run: yarn install
+
       - name: Create gh-pages-dir
         run: |
           mkdir -p ./public
@@ -22,6 +25,14 @@ jobs:
       - name: copy file
         run: |
           cp ./docs/index.html ./public/index.html
+
+      - name: create tsuml2 file
+        run: |
+          tsuml2 --glob "./src/**/*.ts" -o "./docs/tsuml2_diagram.svg"
+      
+      - name: copy tsuml2 file
+        run: |
+          cp ./docs/tsuml2_diagram.svg ./public/tsuml2_diagram.svg
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
