@@ -42,7 +42,8 @@
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "tsuml2": "^0.7.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
