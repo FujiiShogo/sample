@@ -27,8 +27,7 @@ jobs:
           cp ./docs/index.html ./public/index.html
 
       - name: create tsuml2 file
-        run: |
-          tsuml2 --glob "./src/**/*.ts" -o "./docs/tsuml2_diagram.svg"
+        run: yarn create-tsuml2
       
       - name: copy tsuml2 file
         run: |
