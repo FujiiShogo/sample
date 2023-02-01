@@ -33,6 +33,15 @@ jobs:
         run: |
           cp ./docs/tsuml2_diagram.svg ./public/tsuml2_diagram.svg
 
+      # Compodoc
+      - name: create compodoc files
+        run: yarn compodoc 
+      
+      - name: move compodoc files
+        run: |
+          mkdir -p ./public/compodoc
+          mv ./docs/compodoc ./public/
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
