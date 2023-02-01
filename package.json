@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "create-tsuml2": "tsuml2 --glob \"./src/**/*.ts\" -o \"./docs/tsuml2_diagram.svg\"",
-    "compodoc": "npx compodoc -p tsconfig.doc.json"
+    "compodoc": "npx compodoc -p tsconfig.doc.json -d docs/compodoc"
   },
   "dependencies": {
     "@compodoc/compodoc": "^1.1.19",
