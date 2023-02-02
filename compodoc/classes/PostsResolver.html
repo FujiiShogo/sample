@@ -1,0 +1,907 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nestjs-graphql-sample documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">nestjs-graphql-sample documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li >PostsResolver</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/gql/resolvers/posts.resolver.ts</code>
+        </p>
+
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addComment" >addComment</a>
+                            </li>
+                            <li>
+                                <a href="#addCommentHandler" >addCommentHandler</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#comments" >comments</a>
+                            </li>
+                            <li>
+                                <a href="#createPost" >createPost</a>
+                            </li>
+                            <li>
+                                <a href="#getAllPosts" >getAllPosts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAuthor" >getAuthor</a>
+                            </li>
+                            <li>
+                                <a href="#getPostById" >getPostById</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(postsService: <a href="../injectables/PostsService.html" target="_self">PostsService</a>, postsLoaders: <a href="../injectables/PostsLoaders.html" target="_self">PostsLoaders</a>, pubSub: PubSub)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/gql/resolvers/posts.resolver.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>postsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PostsService.html" target="_self" >PostsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>postsLoaders</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PostsLoaders.html" target="_self" >PostsLoaders</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>pubSub</td>
+                                                  
+                                                        <td>
+                                                                    <code>PubSub</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addComment"></a>
+                    <span class="name">
+                        <span ><b>addComment</b></span>
+                        <a href="#addComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addComment(commentInput: <a href="../classes/CommentInput.html" target="_self">CommentInput</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Mutation(returns &#x3D;&gt; Comment)<br />@UseGuards(JwtAuthGuard, HasPermissionsGuard)<br />@HasPermissions(PermissionType.WRITE_POSTS)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:97</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>commentInput</td>
+                                    <td>
+                                                <code><a href="../classes/CommentInput.html" target="_self" >CommentInput</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Comment.html" target="_self" >Observable&lt;Comment&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addCommentHandler"></a>
+                    <span class="name">
+                        <span ><b>addCommentHandler</b></span>
+                        <a href="#addCommentHandler"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addCommentHandler()</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Subscription(returns &#x3D;&gt; Comment, {name: &#x27;commentAdded&#x27;})<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="108"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:108</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comments"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>comments</b></span>
+                        <a href="#comments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>comments(post: <a href="../classes/Post.html" target="_self">Post</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@ResolveField(of &#x3D;&gt; )<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:80</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>post</td>
+                                    <td>
+                                                <code><a href="../classes/Post.html" target="_self" >Post</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Comment.html" target="_self" >Promise&lt;Comment[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPost"></a>
+                    <span class="name">
+                        <span ><b>createPost</b></span>
+                        <a href="#createPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createPost(user: <a href="../interfaces/UserPrincipal.html" target="_self">UserPrincipal</a>, data: <a href="../classes/PostInput.html" target="_self">PostInput</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Mutation(returns &#x3D;&gt; Post)<br />@UseGuards(JwtAuthGuard, HasPermissionsGuard)<br />@HasPermissions(PermissionType.WRITE_POSTS)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="87"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:87</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../interfaces/UserPrincipal.html" target="_self" >UserPrincipal</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                                <code><a href="../classes/PostInput.html" target="_self" >PostInput</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Post.html" target="_self" >Observable&lt;Post&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllPosts"></a>
+                    <span class="name">
+                        <span ><b>getAllPosts</b></span>
+                        <a href="#getAllPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllPosts(postsArg: <a href="../classes/PostsArgs.html" target="_self">PostsArgs</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Query(returns &#x3D;&gt; )<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>postsArg</td>
+                                    <td>
+                                                <code><a href="../classes/PostsArgs.html" target="_self" >PostsArgs</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Post.html" target="_self" >Observable&lt;Post[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthor"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getAuthor</b></span>
+                        <a href="#getAuthor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthor(post: <a href="../classes/Post.html" target="_self">Post</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@ResolveField(&#x27;author&#x27;, of &#x3D;&gt; User)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:68</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>post</td>
+                                    <td>
+                                                <code><a href="../classes/Post.html" target="_self" >Post</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPostById"></a>
+                    <span class="name">
+                        <span ><b>getPostById</b></span>
+                        <a href="#getPostById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPostById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Query(returns &#x3D;&gt; Post)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/gql/resolvers/posts.resolver.ts:56</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Post.html" target="_self" >Observable&lt;Post&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ParseUUIDPipe, UseGuards } from &#x27;@nestjs/common&#x27;;
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+  Subscription,
+} from &#x27;@nestjs/graphql&#x27;;
+import { PubSub } from &#x27;graphql-subscriptions&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { tap, throwIfEmpty } from &#x27;rxjs/operators&#x27;;
+import { GqlUser } from &#x27;../../authz/gql-user.decorator&#x27;;
+import { HasPermissions } from &#x27;../../authz/has-permissions.decorator&#x27;;
+import { HasPermissionsGuard } from &#x27;../../authz/has-permissions.guard&#x27;;
+import { JwtAuthGuard } from &#x27;../../authz/jwt-auth.guard&#x27;;
+import { PermissionType } from &#x27;../../authz/permission-type.enum&#x27;;
+import { UserPrincipal } from &#x27;../../authz/user-principal.interface&#x27;;
+import { CommentInput } from &#x27;../dto/comment.input&#x27;;
+import { PostInput } from &#x27;../dto/post.input&#x27;;
+import { PostsArgs } from &#x27;../dto/posts.arg&#x27;;
+import { Comment } from &#x27;../types/comment.model&#x27;;
+import { Post } from &#x27;../types/post.model&#x27;;
+import PostsLoaders from &#x27;../dataloaders/posts.loaders&#x27;;
+import { PostsService } from &#x27;../service/posts.service&#x27;;
+import { PostNotFoundError } from &#x27;./post-not-found.error&#x27;;
+import { User } from &#x27;../types/user.model&#x27;;
+
+@Resolver((of) &#x3D;&gt; Post)
+export class PostsResolver {
+  constructor(
+    private readonly postsService: PostsService,
+    private readonly postsLoaders: PostsLoaders,
+    private readonly pubSub: PubSub,
+  ) {}
+
+  // @Query(() &#x3D;&gt; [Post])
+  // async posts(
+  //   @Info() info: GraphQLResolveInfo
+  // ) {
+  //   const parsedInfo &#x3D; parseResolveInfo(info) as ResolveTree;
+  //   const simplifiedInfo &#x3D; simplifyParsedResolveInfoFragmentWithType(
+  //     parsedInfo,
+  //     info.returnType
+  //   );
+
+  //   const posts &#x3D; &#x27;author&#x27; in simplifiedInfo.fields
+  //     ? await this.postsService.getPostsWithAuthors()
+  //     : await this.postsService.getPosts();
+
+  //   return posts.items;
+  // }
+
+  @Query((returns) &#x3D;&gt; Post)
+  getPostById(@Args(&#x27;postId&#x27;, ParseUUIDPipe) id: string): Observable&lt;Post&gt; {
+    return this.postsService
+      .findById(id)
+      .pipe(throwIfEmpty(() &#x3D;&gt; new PostNotFoundError(id)));
+  }
+
+  @Query((returns) &#x3D;&gt; [Post])
+  getAllPosts(@Args() postsArg: PostsArgs): Observable&lt;Post[]&gt; {
+    return this.postsService.findAll(postsArg);
+  }
+
+  @ResolveField(&#x27;author&#x27;, (of) &#x3D;&gt; User)
+  async getAuthor(@Parent() post: Post): Promise&lt;User&gt; {
+    const { authorId } &#x3D; post;
+    console.log(&#x27;resovle author field:&#x27;, authorId);
+    return await this.postsLoaders.loadAuthors.load(authorId);
+  }
+
+  // @ResolveField((of) &#x3D;&gt; [Comment])
+  // public comments(@Parent() post: Post): Observable&lt;Comment[]&gt; {
+  //   return this.postsService.findCommentsOfPost(post.id);
+  // }
+
+  @ResolveField((of) &#x3D;&gt; [Comment])
+  async comments(@Parent() post: Post): Promise&lt;Comment[]&gt; {
+    return await this.postsLoaders.loadComments.load(post.id);
+  }
+
+  @Mutation((returns) &#x3D;&gt; Post)
+  @UseGuards(JwtAuthGuard, HasPermissionsGuard)
+  @HasPermissions(PermissionType.WRITE_POSTS)
+  createPost(
+    @GqlUser() user: UserPrincipal,
+    @Args(&#x27;createPostInput&#x27;) data: PostInput,
+  ): Observable&lt;Post&gt; {
+    return this.postsService.createPost(user.userId, data);
+  }
+
+  @Mutation((returns) &#x3D;&gt; Comment)
+  @UseGuards(JwtAuthGuard, HasPermissionsGuard)
+  @HasPermissions(PermissionType.WRITE_POSTS)
+  addComment(
+    @Args(&#x27;commentInput&#x27;, ParseUUIDPipe) commentInput: CommentInput,
+  ): Observable&lt;Comment&gt; {
+    return this.postsService
+      .addComment(commentInput.postId, commentInput.content)
+      .pipe(
+        tap((c) &#x3D;&gt; this.pubSub.publish(&#x27;commentAdded&#x27;, { commentAdded: c })),
+      );
+  }
+
+  @Subscription((returns) &#x3D;&gt; Comment, { name: &#x27;commentAdded&#x27; })
+  addCommentHandler() {
+    return this.pubSub.asyncIterator(&#x27;commentAdded&#x27;);
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'PostsResolver.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

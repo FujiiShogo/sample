@@ -1,0 +1,1128 @@
+<svg version="1.1" baseProfile="full" width="10682.0" height="447.0" viewbox="0 0 10682 447" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[AppModule||]
+[&lt;interface&gt;AuthenticatedRequest|+user: UserPrincipal|]
+[Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;]&lt;:--[AuthenticatedRequest]
+[AuthzModule||]
+[HasPermissionsGuard|-reflector: Reflector|+canActivate(): boolean \| Promise&lt;boolean&gt; \| Observable&lt;boolean&gt;]
+[CanActivate]&lt;:--[HasPermissionsGuard]
+[JwtAuthGuard||+canActivate(): boolean \| Promise&lt;boolean&gt; \| Observable&lt;boolean&gt;;+handleRequest(): any]
+[&lt;interface&gt;JwtPayload|+sub: string;+email: string;+name: string;+permissions: string\[\]|]
+[JwtStrategy|+config: { audience: string; issuerUri: string; }|+validate(): UserPrincipal]
+[Strategy]&lt;:-[JwtStrategy]
+[&lt;enumeration&gt;PermissionType|READ_POSTS;WRITE_POSTS;DELETE_POSTS]
+[&lt;interface&gt;UserPrincipal|+userId: string;+email: string;+name: string;+permissions: PermissionType\[\]|]
+[DatabaseModule||]
+[PostsDataInitializer|-data: any\[\];-postRepository: PostRepository;-manager: EntityManager|+onModuleInit(): Promise&lt;void&gt;]
+[OnModuleInit]&lt;:--[PostsDataInitializer]
+[GqlApiModule||]
+[CommentEntity|+id: string;+content: string;+post: PostEntity;+postId: string;+createdAt: Date|]
+[PostEntity|+id: string;+title: string;+content: string;+comments: Promise&lt;CommentEntity\[\]&gt;;+author: UserEntity;+authorId: string;+createdAt: Date;+updatedAt: Date|]
+[UserEntity|+id: string;+email: string;+name: string|]
+[CommentRepository||+findByPostId(): Promise&lt;CommentEntity\[\]&gt;]
+[PostRepository||+findAll(): Promise&lt;PostEntity\[\]&gt;;+findByAuthor(): Promise&lt;PostEntity\[\]&gt;]
+[UserRepository||+findByEmail(): Promise&lt;UserEntity&gt;]
+[default|+loadAuthors: User, string&gt;;+loadComments: Comment\[\], string&gt;;-postService: PostsService;-usersService: UsersService|]
+[UpperCaseDirective||+visitFieldDefinition(): void]
+[SchemaDirectiveVisitor&lt;TArgs,TContext&gt;]&lt;:-[UpperCaseDirective]
+[CommentInput|+postId: string;+content: string|]
+[PostInput|+id: string;+title: string;+content: string|]
+[PostsArgs|+keyword: string;+skip: number;+take: number|]
+[HttpExceptionFilter||+catch(): HttpException]
+[GqlExceptionFilter&lt;TInput,TOutput&gt;]&lt;:--[HttpExceptionFilter]
+[LoggingPlugin||+requestDidStart(): Promise&lt;GraphQLRequestListener&lt;BaseContext&gt;&gt;]
+[ApolloServerPlugin&lt;TContext&gt;]&lt;:--[LoggingPlugin]
+[PostNotFoundError|+postId: string|]
+[ApolloError]&lt;:-[PostNotFoundError]
+[PostsResolver|-postsService: PostsService;-postsLoaders: default;-pubSub: PubSub|+getPostById(): Observable&lt;Post&gt;;+getAllPosts(): Observable&lt;Post\[\]&gt;;+getAuthor(): Promise&lt;User&gt;;+comments(): Promise&lt;Comment\[\]&gt;;+createPost(): Observable&lt;Post&gt;;+addComment(): Observable&lt;Comment&gt;;+addCommentHandler(): AsyncIterator&lt;unknown, any, undefined&gt;]
+[UserNotFoundError|+postId: string|]
+[ApolloError]&lt;:-[UserNotFoundError]
+[UsersResolver|-usersService: UsersService;-postsService: PostsService|+getUserById(): Observable&lt;User&gt;;+posts(): Observable&lt;Post\[\]&gt;;+updateUser(): Observable&lt;UpdateUserResult&gt;]
+[DateScalar|+description: string|+parseValue(): Date;+serialize(): number;+parseLiteral(): Date]
+[CustomScalar&lt;T,K&gt;]&lt;:--[DateScalar]
+[PostsService|-postRepository: PostRepository;-commentRepository: CommentRepository|+findById(): Observable&lt;Post&gt;;+findAll(): Observable&lt;Post\[\]&gt;;+createPost(): Observable&lt;Post&gt;;+findByAuthor(): Observable&lt;Post\[\]&gt;;+findCommentsByPostId(): Observable&lt;Comment\[\]&gt;;+findCommentsByPostIds(): Observable&lt;Comment\[\]&gt;;+addComment(): Observable&lt;Comment&gt;;-mapAsModel(): Post;-mapAsModelArray(): Post\[\]]
+[UsersService|-userRepository: UserRepository|+update(): Observable&lt;boolean&gt;;+findById(): Observable&lt;User&gt;;+findByIds(): Observable&lt;User\[\]&gt;]
+[Comment|+id: string;+content: string;+postId: string;+post: Post|]
+[Post|+id: string;+title: string;+content: string;+createdAt: Date;+updatedAt: Date;+comments: Comment\[\];+author: User;+authorId: string|]
+[UpdateUserResult|+success: boolean;+message: string|]
+[User|+id: string;+name: string;+email: string;+posts: Post\[\]|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+<g transform="translate(0.5, 0.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="447.0" width="10682.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M7496.0 142.8 L7496 248 L7496 294.5 L7496.0 294.5 " fill="none"></path>
+</g>
+<path d="M7501.3 142.8 L7496.0 142.8 L7490.7 142.8 L7496.0 129.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M7910.0 142.8 L7910 248 L7910 283 L7910.0 283.0 " fill="none"></path>
+</g>
+<path d="M7915.3 142.8 L7910.0 142.8 L7904.7 142.8 L7910.0 129.5 Z"></path>
+<path d="M8339.5 142.8 L8339.5 248 L8339.5 268 L8339.5 268.0 " fill="none"></path>
+<path d="M8344.8 142.8 L8339.5 142.8 L8334.2 142.8 L8339.5 129.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M8626.0 142.8 L8626 248 L8626 268 L8626.0 268.0 " fill="none"></path>
+</g>
+<path d="M8631.3 142.8 L8626.0 142.8 L8620.7 142.8 L8626.0 129.5 Z"></path>
+<path d="M8913.5 142.8 L8913.5 248 L8913.5 294.5 L8913.5 294.5 " fill="none"></path>
+<path d="M8918.8 142.8 L8913.5 142.8 L8908.2 142.8 L8913.5 129.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M9272.5 142.8 L9272.5 248 L9272.5 294.5 L9272.5 294.5 " fill="none"></path>
+</g>
+<path d="M9277.8 142.8 L9272.5 142.8 L9267.2 142.8 L9272.5 129.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M9702.0 142.8 L9702 248 L9702 294.5 L9702.0 294.5 " fill="none"></path>
+</g>
+<path d="M9707.3 142.8 L9702.0 142.8 L9696.7 142.8 L9702.0 129.5 Z"></path>
+<path d="M10198.3 140.0 L10114.5 248 L10114.5 294.5 L10114.5 294.5 " fill="none"></path>
+<path d="M10202.5 143.3 L10198.3 140.0 L10194.1 136.8 L10206.5 129.5 Z"></path>
+<path d="M10238.7 140.0 L10322.5 248 L10322.5 294.5 L10322.5 294.5 " fill="none"></path>
+<path d="M10242.9 136.8 L10238.7 140.0 L10234.5 143.3 L10230.5 129.5 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M10536.5 142.8 L10536.5 248 L10536.5 268 L10536.5 268.0 " fill="none"></path>
+</g>
+<path d="M10541.8 142.8 L10536.5 142.8 L10531.2 142.8 L10536.5 129.5 Z"></path>
+<g data-name="AppModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="AppModule">
+<rect x="0.0" y="91.0" height="47.0" width="105.0" data-name="AppModule"></rect>
+<path d="M0.0 122.0 L105.0 122.0" fill="none" data-name="AppModule"></path>
+<path d="M0.0 130.0 L105.0 130.0" fill="none" data-name="AppModule"></path>
+</g>
+<g transform="translate(0, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AppModule">
+<a id="../src/app.module.ts.AppModule" xlink:href="../src/app.module.ts"><text x="44.5" y="13.5" stroke="none" text-anchor="middle" data-name="AppModule">AppModule</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppModule">
+
+</g>
+</g>
+<g transform="translate(0, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AppModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AppModule">
+
+</g>
+</g>
+</g>
+<g data-name="AuthenticatedRequest">
+<g fill="lightblue" stroke="#33322E" data-name="AuthenticatedRequest">
+<rect x="7401.0" y="295.0" height="70.0" width="191.0" data-name="AuthenticatedRequest"></rect>
+<path d="M7401.0 326.0 L7592.0 326.0" fill="none" data-name="AuthenticatedRequest"></path>
+<path d="M7401.0 357.0 L7592.0 357.0" fill="none" data-name="AuthenticatedRequest"></path>
+</g>
+<g transform="translate(7401, 295)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticatedRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthenticatedRequest">
+<a id="../src/authz/authenticated-request.interface.ts.AuthenticatedRequest" xlink:href="../src/authz/authenticated-request.interface.ts"><text x="87.5" y="13.5" stroke="none" text-anchor="middle" data-name="AuthenticatedRequest">AuthenticatedRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(7401, 326)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticatedRequest">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthenticatedRequest">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthenticatedRequest">+user: UserPrincipal</text>
+
+</g>
+</g>
+<g transform="translate(7401, 357)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticatedRequest">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthenticatedRequest">
+
+</g>
+</g>
+</g>
+<g data-name="AuthzModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthzModule">
+<rect x="145.0" y="91.0" height="47.0" width="119.0" data-name="AuthzModule"></rect>
+<path d="M145.0 122.0 L264.0 122.0" fill="none" data-name="AuthzModule"></path>
+<path d="M145.0 130.0 L264.0 130.0" fill="none" data-name="AuthzModule"></path>
+</g>
+<g transform="translate(145, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthzModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthzModule">
+<a id="../src/authz/authz.module.ts.AuthzModule" xlink:href="../src/authz/authz.module.ts"><text x="51.5" y="13.5" stroke="none" text-anchor="middle" data-name="AuthzModule">AuthzModule</text></a>
+
+</g>
+</g>
+<g transform="translate(145, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthzModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthzModule">
+
+</g>
+</g>
+<g transform="translate(145, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthzModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthzModule">
+
+</g>
+</g>
+</g>
+<g data-name="HasPermissionsGuard">
+<g fill="#eee8d5" stroke="#33322E" data-name="HasPermissionsGuard">
+<rect x="7632.0" y="283.0" height="93.0" width="557.0" data-name="HasPermissionsGuard"></rect>
+<path d="M7632.0 314.0 L8189.0 314.0" fill="none" data-name="HasPermissionsGuard"></path>
+<path d="M7632.0 345.0 L8189.0 345.0" fill="none" data-name="HasPermissionsGuard"></path>
+</g>
+<g transform="translate(7632, 283)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="HasPermissionsGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HasPermissionsGuard">
+<a id="../src/authz/has-permissions.guard.ts.HasPermissionsGuard" xlink:href="../src/authz/has-permissions.guard.ts"><text x="270.5" y="13.5" stroke="none" text-anchor="middle" data-name="HasPermissionsGuard">HasPermissionsGuard</text></a>
+
+</g>
+</g>
+<g transform="translate(7632, 314)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HasPermissionsGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="HasPermissionsGuard">
+<text x="0.0" y="13.5" stroke="none" data-name="HasPermissionsGuard">-reflector: Reflector</text>
+
+</g>
+</g>
+<g transform="translate(7632, 345)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HasPermissionsGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="HasPermissionsGuard">
+<text x="0.0" y="13.5" stroke="none" data-name="HasPermissionsGuard">+canActivate(): boolean | Promise&lt;boolean&gt; | Observable&lt;boolean&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="JwtAuthGuard">
+<g fill="#eee8d5" stroke="#33322E" data-name="JwtAuthGuard">
+<rect x="304.0" y="72.0" height="85.0" width="557.0" data-name="JwtAuthGuard"></rect>
+<path d="M304.0 103.0 L861.0 103.0" fill="none" data-name="JwtAuthGuard"></path>
+<path d="M304.0 111.0 L861.0 111.0" fill="none" data-name="JwtAuthGuard"></path>
+</g>
+<g transform="translate(304, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="JwtAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtAuthGuard">
+<a id="../src/authz/jwt-auth.guard.ts.JwtAuthGuard" xlink:href="../src/authz/jwt-auth.guard.ts"><text x="270.5" y="13.5" stroke="none" text-anchor="middle" data-name="JwtAuthGuard">JwtAuthGuard</text></a>
+
+</g>
+</g>
+<g transform="translate(304, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" data-name="JwtAuthGuard">
+
+</g>
+</g>
+<g transform="translate(304, 111)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtAuthGuard">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtAuthGuard">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtAuthGuard">+canActivate(): boolean | Promise&lt;boolean&gt; | Observable&lt;boolean&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JwtAuthGuard">+handleRequest(): any</text>
+
+</g>
+</g>
+</g>
+<g data-name="JwtPayload">
+<g fill="lightblue" stroke="#33322E" data-name="JwtPayload">
+<rect x="901.0" y="57.0" height="115.0" width="185.0" data-name="JwtPayload"></rect>
+<path d="M901.0 88.0 L1086.0 88.0" fill="none" data-name="JwtPayload"></path>
+<path d="M901.0 164.0 L1086.0 164.0" fill="none" data-name="JwtPayload"></path>
+</g>
+<g transform="translate(901, 57)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtPayload">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtPayload">
+<a id="../src/authz/jwt-payload.interface.ts.JwtPayload" xlink:href="../src/authz/jwt-payload.interface.ts"><text x="84.5" y="13.5" stroke="none" text-anchor="middle" data-name="JwtPayload">JwtPayload</text></a>
+
+</g>
+</g>
+<g transform="translate(901, 88)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtPayload">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtPayload">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtPayload">+sub: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JwtPayload">+email: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="JwtPayload">+name: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="JwtPayload">+permissions: string[]</text>
+
+</g>
+</g>
+<g transform="translate(901, 164)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtPayload">
+<g transform="translate(8, 8)" fill="#33322E" data-name="JwtPayload">
+
+</g>
+</g>
+</g>
+<g data-name="JwtStrategy">
+<g fill="#eee8d5" stroke="#33322E" data-name="JwtStrategy">
+<rect x="8229.0" y="268.0" height="123.0" width="222.0" data-name="JwtStrategy"></rect>
+<path d="M8229.0 299.0 L8451.0 299.0" fill="none" data-name="JwtStrategy"></path>
+<path d="M8229.0 360.0 L8451.0 360.0" fill="none" data-name="JwtStrategy"></path>
+</g>
+<g transform="translate(8229, 268)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="JwtStrategy">
+<a id="../src/authz/jwt.strategy.ts.JwtStrategy" xlink:href="../src/authz/jwt.strategy.ts"><text x="103.0" y="13.5" stroke="none" text-anchor="middle" data-name="JwtStrategy">JwtStrategy</text></a>
+
+</g>
+</g>
+<g transform="translate(8229, 299)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtStrategy">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtStrategy">+config: { audience: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="JwtStrategy">issuerUri: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="JwtStrategy">}</text>
+
+</g>
+</g>
+<g transform="translate(8229, 360)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="JwtStrategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="JwtStrategy">
+<text x="0.0" y="13.5" stroke="none" data-name="JwtStrategy">+validate(): UserPrincipal</text>
+
+</g>
+</g>
+</g>
+<g data-name="UserPrincipal">
+<g fill="lightblue" stroke="#33322E" data-name="UserPrincipal">
+<rect x="1126.0" y="57.0" height="115.0" width="267.0" data-name="UserPrincipal"></rect>
+<path d="M1126.0 88.0 L1393.0 88.0" fill="none" data-name="UserPrincipal"></path>
+<path d="M1126.0 164.0 L1393.0 164.0" fill="none" data-name="UserPrincipal"></path>
+</g>
+<g transform="translate(1126, 57)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserPrincipal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserPrincipal">
+<a id="../src/authz/user-principal.interface.ts.UserPrincipal" xlink:href="../src/authz/user-principal.interface.ts"><text x="125.5" y="13.5" stroke="none" text-anchor="middle" data-name="UserPrincipal">UserPrincipal</text></a>
+
+</g>
+</g>
+<g transform="translate(1126, 88)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserPrincipal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserPrincipal">
+<text x="0.0" y="13.5" stroke="none" data-name="UserPrincipal">+userId: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UserPrincipal">+email: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UserPrincipal">+name: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UserPrincipal">+permissions: PermissionType[]</text>
+
+</g>
+</g>
+<g transform="translate(1126, 164)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserPrincipal">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserPrincipal">
+
+</g>
+</g>
+</g>
+<g data-name="DatabaseModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="DatabaseModule">
+<rect x="1433.0" y="91.0" height="47.0" width="150.0" data-name="DatabaseModule"></rect>
+<path d="M1433.0 122.0 L1583.0 122.0" fill="none" data-name="DatabaseModule"></path>
+<path d="M1433.0 130.0 L1583.0 130.0" fill="none" data-name="DatabaseModule"></path>
+</g>
+<g transform="translate(1433, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DatabaseModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DatabaseModule">
+<a id="../src/database/database.module.ts.DatabaseModule" xlink:href="../src/database/database.module.ts"><text x="67.0" y="13.5" stroke="none" text-anchor="middle" data-name="DatabaseModule">DatabaseModule</text></a>
+
+</g>
+</g>
+<g transform="translate(1433, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DatabaseModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="DatabaseModule">
+
+</g>
+</g>
+<g transform="translate(1433, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DatabaseModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="DatabaseModule">
+
+</g>
+</g>
+</g>
+<g data-name="PostsDataInitializer">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsDataInitializer">
+<rect x="8491.0" y="268.0" height="123.0" width="271.0" data-name="PostsDataInitializer"></rect>
+<path d="M8491.0 299.0 L8762.0 299.0" fill="none" data-name="PostsDataInitializer"></path>
+<path d="M8491.0 360.0 L8762.0 360.0" fill="none" data-name="PostsDataInitializer"></path>
+</g>
+<g transform="translate(8491, 268)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsDataInitializer">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsDataInitializer">
+<a id="../src/database/posts-data-initializer.ts.PostsDataInitializer" xlink:href="../src/database/posts-data-initializer.ts"><text x="127.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostsDataInitializer">PostsDataInitializer</text></a>
+
+</g>
+</g>
+<g transform="translate(8491, 299)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsDataInitializer">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsDataInitializer">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsDataInitializer">-data: any[]</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsDataInitializer">-postRepository: PostRepository</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsDataInitializer">-manager: EntityManager</text>
+
+</g>
+</g>
+<g transform="translate(8491, 360)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsDataInitializer">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsDataInitializer">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsDataInitializer">+onModuleInit(): Promise&lt;void&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="GqlApiModule">
+<g fill="#eee8d5" stroke="#33322E" data-name="GqlApiModule">
+<rect x="1623.0" y="91.0" height="47.0" width="126.0" data-name="GqlApiModule"></rect>
+<path d="M1623.0 122.0 L1749.0 122.0" fill="none" data-name="GqlApiModule"></path>
+<path d="M1623.0 130.0 L1749.0 130.0" fill="none" data-name="GqlApiModule"></path>
+</g>
+<g transform="translate(1623, 91)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="GqlApiModule">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="GqlApiModule">
+<a id="../src/gql/gql-api.module.ts.GqlApiModule" xlink:href="../src/gql/gql-api.module.ts"><text x="55.0" y="13.5" stroke="none" text-anchor="middle" data-name="GqlApiModule">GqlApiModule</text></a>
+
+</g>
+</g>
+<g transform="translate(1623, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GqlApiModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="GqlApiModule">
+
+</g>
+</g>
+<g transform="translate(1623, 130)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="GqlApiModule">
+<g transform="translate(8, 8)" fill="#33322E" data-name="GqlApiModule">
+
+</g>
+</g>
+</g>
+<g data-name="CommentEntity">
+<g fill="#eee8d5" stroke="#33322E" data-name="CommentEntity">
+<rect x="1789.0" y="49.0" height="130.0" width="149.0" data-name="CommentEntity"></rect>
+<path d="M1789.0 80.0 L1938.0 80.0" fill="none" data-name="CommentEntity"></path>
+<path d="M1789.0 171.0 L1938.0 171.0" fill="none" data-name="CommentEntity"></path>
+</g>
+<g transform="translate(1789, 49)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CommentEntity">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CommentEntity">
+<a id="../src/database/entity/comment.entity.ts.CommentEntity" xlink:href="../src/database/entity/comment.entity.ts"><text x="66.5" y="13.5" stroke="none" text-anchor="middle" data-name="CommentEntity">CommentEntity</text></a>
+
+</g>
+</g>
+<g transform="translate(1789, 80)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CommentEntity">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CommentEntity">
+<text x="0.0" y="13.5" stroke="none" data-name="CommentEntity">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CommentEntity">+content: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="CommentEntity">+post: PostEntity</text>
+<text x="0.0" y="58.5" stroke="none" data-name="CommentEntity">+postId: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="CommentEntity">+createdAt: Date</text>
+
+</g>
+</g>
+<g transform="translate(1789, 171)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CommentEntity">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CommentEntity">
+
+</g>
+</g>
+</g>
+<g data-name="PostEntity">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostEntity">
+<rect x="1978.0" y="27.0" height="175.0" width="330.0" data-name="PostEntity"></rect>
+<path d="M1978.0 58.0 L2308.0 58.0" fill="none" data-name="PostEntity"></path>
+<path d="M1978.0 194.0 L2308.0 194.0" fill="none" data-name="PostEntity"></path>
+</g>
+<g transform="translate(1978, 27)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostEntity">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostEntity">
+<a id="../src/database/entity/post.entity.ts.PostEntity" xlink:href="../src/database/entity/post.entity.ts"><text x="157.0" y="13.5" stroke="none" text-anchor="middle" data-name="PostEntity">PostEntity</text></a>
+
+</g>
+</g>
+<g transform="translate(1978, 58)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostEntity">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostEntity">
+<text x="0.0" y="13.5" stroke="none" data-name="PostEntity">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostEntity">+title: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostEntity">+content: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostEntity">+comments: Promise&lt;CommentEntity[]&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostEntity">+author: UserEntity</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostEntity">+authorId: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostEntity">+createdAt: Date</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PostEntity">+updatedAt: Date</text>
+
+</g>
+</g>
+<g transform="translate(1978, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostEntity">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostEntity">
+
+</g>
+</g>
+</g>
+<g data-name="UserEntity">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserEntity">
+<rect x="2348.0" y="64.0" height="100.0" width="124.0" data-name="UserEntity"></rect>
+<path d="M2348.0 95.0 L2472.0 95.0" fill="none" data-name="UserEntity"></path>
+<path d="M2348.0 156.0 L2472.0 156.0" fill="none" data-name="UserEntity"></path>
+</g>
+<g transform="translate(2348, 64)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserEntity">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserEntity">
+<a id="../src/database/entity/user.entity.ts.UserEntity" xlink:href="../src/database/entity/user.entity.ts"><text x="54.0" y="13.5" stroke="none" text-anchor="middle" data-name="UserEntity">UserEntity</text></a>
+
+</g>
+</g>
+<g transform="translate(2348, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserEntity">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserEntity">
+<text x="0.0" y="13.5" stroke="none" data-name="UserEntity">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UserEntity">+email: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UserEntity">+name: string</text>
+
+</g>
+</g>
+<g transform="translate(2348, 156)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserEntity">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserEntity">
+
+</g>
+</g>
+</g>
+<g data-name="CommentRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="CommentRepository">
+<rect x="2512.0" y="79.0" height="70.0" width="360.0" data-name="CommentRepository"></rect>
+<path d="M2512.0 110.0 L2872.0 110.0" fill="none" data-name="CommentRepository"></path>
+<path d="M2512.0 118.0 L2872.0 118.0" fill="none" data-name="CommentRepository"></path>
+</g>
+<g transform="translate(2512, 79)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CommentRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CommentRepository">
+<a id="../src/database/repository/comment.repository.ts.CommentRepository" xlink:href="../src/database/repository/comment.repository.ts"><text x="172.0" y="13.5" stroke="none" text-anchor="middle" data-name="CommentRepository">CommentRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(2512, 110)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CommentRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CommentRepository">
+
+</g>
+</g>
+<g transform="translate(2512, 118)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CommentRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CommentRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="CommentRepository">+findByPostId(): Promise&lt;CommentEntity[]&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PostRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostRepository">
+<rect x="2912.0" y="72.0" height="85.0" width="322.0" data-name="PostRepository"></rect>
+<path d="M2912.0 103.0 L3234.0 103.0" fill="none" data-name="PostRepository"></path>
+<path d="M2912.0 111.0 L3234.0 111.0" fill="none" data-name="PostRepository"></path>
+</g>
+<g transform="translate(2912, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostRepository">
+<a id="../src/database/repository/post.repository.ts.PostRepository" xlink:href="../src/database/repository/post.repository.ts"><text x="153.0" y="13.5" stroke="none" text-anchor="middle" data-name="PostRepository">PostRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(2912, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostRepository">
+
+</g>
+</g>
+<g transform="translate(2912, 111)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="PostRepository">+findAll(): Promise&lt;PostEntity[]&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostRepository">+findByAuthor(): Promise&lt;PostEntity[]&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UserRepository">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserRepository">
+<rect x="3274.0" y="79.0" height="70.0" width="305.0" data-name="UserRepository"></rect>
+<path d="M3274.0 110.0 L3579.0 110.0" fill="none" data-name="UserRepository"></path>
+<path d="M3274.0 118.0 L3579.0 118.0" fill="none" data-name="UserRepository"></path>
+</g>
+<g transform="translate(3274, 79)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserRepository">
+<a id="../src/database/repository/user.repository.ts.UserRepository" xlink:href="../src/database/repository/user.repository.ts"><text x="144.5" y="13.5" stroke="none" text-anchor="middle" data-name="UserRepository">UserRepository</text></a>
+
+</g>
+</g>
+<g transform="translate(3274, 110)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserRepository">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserRepository">
+
+</g>
+</g>
+<g transform="translate(3274, 118)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserRepository">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserRepository">
+<text x="0.0" y="13.5" stroke="none" data-name="UserRepository">+findByEmail(): Promise&lt;UserEntity&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="default">
+<g fill="#eee8d5" stroke="#33322E" data-name="default">
+<rect x="3619.0" y="57.0" height="115.0" width="303.0" data-name="default"></rect>
+<path d="M3619.0 88.0 L3922.0 88.0" fill="none" data-name="default"></path>
+<path d="M3619.0 164.0 L3922.0 164.0" fill="none" data-name="default"></path>
+</g>
+<g transform="translate(3619, 57)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="default">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="default">
+<a id="../src/gql/dataloaders/posts.loaders.ts.default" xlink:href="../src/gql/dataloaders/posts.loaders.ts"><text x="143.5" y="13.5" stroke="none" text-anchor="middle" data-name="default">default</text></a>
+
+</g>
+</g>
+<g transform="translate(3619, 88)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="default">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="default">
+<text x="0.0" y="13.5" stroke="none" data-name="default">+loadAuthors: User, string&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="default">+loadComments: Comment[], string&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="default">-postService: PostsService</text>
+<text x="0.0" y="58.5" stroke="none" data-name="default">-usersService: UsersService</text>
+
+</g>
+</g>
+<g transform="translate(3619, 164)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="default">
+<g transform="translate(8, 8)" fill="#33322E" data-name="default">
+
+</g>
+</g>
+</g>
+<g data-name="UpperCaseDirective">
+<g fill="#eee8d5" stroke="#33322E" data-name="UpperCaseDirective">
+<rect x="8802.0" y="295.0" height="70.0" width="224.0" data-name="UpperCaseDirective"></rect>
+<path d="M8802.0 326.0 L9026.0 326.0" fill="none" data-name="UpperCaseDirective"></path>
+<path d="M8802.0 334.0 L9026.0 334.0" fill="none" data-name="UpperCaseDirective"></path>
+</g>
+<g transform="translate(8802, 295)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UpperCaseDirective">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UpperCaseDirective">
+<a id="../src/gql/directives/upper-case.directive.ts.UpperCaseDirective" xlink:href="../src/gql/directives/upper-case.directive.ts"><text x="104.0" y="13.5" stroke="none" text-anchor="middle" data-name="UpperCaseDirective">UpperCaseDirective</text></a>
+
+</g>
+</g>
+<g transform="translate(8802, 326)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpperCaseDirective">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UpperCaseDirective">
+
+</g>
+</g>
+<g transform="translate(8802, 334)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpperCaseDirective">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UpperCaseDirective">
+<text x="0.0" y="13.5" stroke="none" data-name="UpperCaseDirective">+visitFieldDefinition(): void</text>
+
+</g>
+</g>
+</g>
+<g data-name="CommentInput">
+<g fill="#eee8d5" stroke="#33322E" data-name="CommentInput">
+<rect x="3962.0" y="72.0" height="85.0" width="139.0" data-name="CommentInput"></rect>
+<path d="M3962.0 103.0 L4101.0 103.0" fill="none" data-name="CommentInput"></path>
+<path d="M3962.0 149.0 L4101.0 149.0" fill="none" data-name="CommentInput"></path>
+</g>
+<g transform="translate(3962, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CommentInput">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CommentInput">
+<a id="../src/gql/dto/comment.input.ts.CommentInput" xlink:href="../src/gql/dto/comment.input.ts"><text x="61.5" y="13.5" stroke="none" text-anchor="middle" data-name="CommentInput">CommentInput</text></a>
+
+</g>
+</g>
+<g transform="translate(3962, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CommentInput">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CommentInput">
+<text x="0.0" y="13.5" stroke="none" data-name="CommentInput">+postId: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="CommentInput">+content: string</text>
+
+</g>
+</g>
+<g transform="translate(3962, 149)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CommentInput">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CommentInput">
+
+</g>
+</g>
+</g>
+<g data-name="PostInput">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostInput">
+<rect x="4141.0" y="64.0" height="100.0" width="139.0" data-name="PostInput"></rect>
+<path d="M4141.0 95.0 L4280.0 95.0" fill="none" data-name="PostInput"></path>
+<path d="M4141.0 156.0 L4280.0 156.0" fill="none" data-name="PostInput"></path>
+</g>
+<g transform="translate(4141, 64)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostInput">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostInput">
+<a id="../src/gql/dto/post.input.ts.PostInput" xlink:href="../src/gql/dto/post.input.ts"><text x="61.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostInput">PostInput</text></a>
+
+</g>
+</g>
+<g transform="translate(4141, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostInput">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostInput">
+<text x="0.0" y="13.5" stroke="none" data-name="PostInput">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostInput">+title: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostInput">+content: string</text>
+
+</g>
+</g>
+<g transform="translate(4141, 156)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostInput">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostInput">
+
+</g>
+</g>
+</g>
+<g data-name="PostsArgs">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsArgs">
+<rect x="4320.0" y="64.0" height="100.0" width="146.0" data-name="PostsArgs"></rect>
+<path d="M4320.0 95.0 L4466.0 95.0" fill="none" data-name="PostsArgs"></path>
+<path d="M4320.0 156.0 L4466.0 156.0" fill="none" data-name="PostsArgs"></path>
+</g>
+<g transform="translate(4320, 64)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsArgs">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsArgs">
+<a id="../src/gql/dto/posts.arg.ts.PostsArgs" xlink:href="../src/gql/dto/posts.arg.ts"><text x="65.0" y="13.5" stroke="none" text-anchor="middle" data-name="PostsArgs">PostsArgs</text></a>
+
+</g>
+</g>
+<g transform="translate(4320, 95)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsArgs">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsArgs">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsArgs">+keyword: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsArgs">+skip: number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsArgs">+take: number</text>
+
+</g>
+</g>
+<g transform="translate(4320, 156)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsArgs">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostsArgs">
+
+</g>
+</g>
+</g>
+<g data-name="HttpExceptionFilter">
+<g fill="#eee8d5" stroke="#33322E" data-name="HttpExceptionFilter">
+<rect x="9172.0" y="295.0" height="70.0" width="201.0" data-name="HttpExceptionFilter"></rect>
+<path d="M9172.0 326.0 L9373.0 326.0" fill="none" data-name="HttpExceptionFilter"></path>
+<path d="M9172.0 334.0 L9373.0 334.0" fill="none" data-name="HttpExceptionFilter"></path>
+</g>
+<g transform="translate(9172, 295)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="HttpExceptionFilter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HttpExceptionFilter">
+<a id="../src/gql/filters/http.exception.filter.ts.HttpExceptionFilter" xlink:href="../src/gql/filters/http.exception.filter.ts"><text x="92.5" y="13.5" stroke="none" text-anchor="middle" data-name="HttpExceptionFilter">HttpExceptionFilter</text></a>
+
+</g>
+</g>
+<g transform="translate(9172, 326)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HttpExceptionFilter">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HttpExceptionFilter">
+
+</g>
+</g>
+<g transform="translate(9172, 334)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HttpExceptionFilter">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="HttpExceptionFilter">
+<text x="0.0" y="13.5" stroke="none" data-name="HttpExceptionFilter">+catch(): HttpException</text>
+
+</g>
+</g>
+</g>
+<g data-name="LoggingPlugin">
+<g fill="#eee8d5" stroke="#33322E" data-name="LoggingPlugin">
+<rect x="9413.0" y="295.0" height="70.0" width="578.0" data-name="LoggingPlugin"></rect>
+<path d="M9413.0 326.0 L9991.0 326.0" fill="none" data-name="LoggingPlugin"></path>
+<path d="M9413.0 334.0 L9991.0 334.0" fill="none" data-name="LoggingPlugin"></path>
+</g>
+<g transform="translate(9413, 295)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="LoggingPlugin">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoggingPlugin">
+<a id="../src/gql/plugins/logging.plugin.ts.LoggingPlugin" xlink:href="../src/gql/plugins/logging.plugin.ts"><text x="281.0" y="13.5" stroke="none" text-anchor="middle" data-name="LoggingPlugin">LoggingPlugin</text></a>
+
+</g>
+</g>
+<g transform="translate(9413, 326)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoggingPlugin">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LoggingPlugin">
+
+</g>
+</g>
+<g transform="translate(9413, 334)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoggingPlugin">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoggingPlugin">
+<text x="0.0" y="13.5" stroke="none" data-name="LoggingPlugin">+requestDidStart(): Promise&lt;GraphQLRequestListener&lt;BaseContext&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PostNotFoundError">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostNotFoundError">
+<rect x="10031.0" y="295.0" height="70.0" width="167.0" data-name="PostNotFoundError"></rect>
+<path d="M10031.0 326.0 L10198.0 326.0" fill="none" data-name="PostNotFoundError"></path>
+<path d="M10031.0 357.0 L10198.0 357.0" fill="none" data-name="PostNotFoundError"></path>
+</g>
+<g transform="translate(10031, 295)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostNotFoundError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostNotFoundError">
+<a id="../src/gql/resolvers/post-not-found.error.ts.PostNotFoundError" xlink:href="../src/gql/resolvers/post-not-found.error.ts"><text x="75.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostNotFoundError">PostNotFoundError</text></a>
+
+</g>
+</g>
+<g transform="translate(10031, 326)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostNotFoundError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostNotFoundError">
+<text x="0.0" y="13.5" stroke="none" data-name="PostNotFoundError">+postId: string</text>
+
+</g>
+</g>
+<g transform="translate(10031, 357)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostNotFoundError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostNotFoundError">
+
+</g>
+</g>
+</g>
+<g data-name="PostsResolver">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsResolver">
+<rect x="4506.0" y="8.0" height="213.0" width="539.0" data-name="PostsResolver"></rect>
+<path d="M4506.0 39.0 L5045.0 39.0" fill="none" data-name="PostsResolver"></path>
+<path d="M4506.0 100.0 L5045.0 100.0" fill="none" data-name="PostsResolver"></path>
+</g>
+<g transform="translate(4506, 8)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsResolver">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsResolver">
+<a id="../src/gql/resolvers/posts.resolver.ts.PostsResolver" xlink:href="../src/gql/resolvers/posts.resolver.ts"><text x="261.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostsResolver">PostsResolver</text></a>
+
+</g>
+</g>
+<g transform="translate(4506, 39)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsResolver">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsResolver">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsResolver">-postsService: PostsService</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsResolver">-postsLoaders: default</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsResolver">-pubSub: PubSub</text>
+
+</g>
+</g>
+<g transform="translate(4506, 100)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsResolver">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsResolver">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsResolver">+getPostById(): Observable&lt;Post&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsResolver">+getAllPosts(): Observable&lt;Post[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsResolver">+getAuthor(): Promise&lt;User&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostsResolver">+comments(): Promise&lt;Comment[]&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostsResolver">+createPost(): Observable&lt;Post&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostsResolver">+addComment(): Observable&lt;Comment&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostsResolver">+addCommentHandler(): AsyncIterator&lt;unknown, any, undefined&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UserNotFoundError">
+<g fill="#eee8d5" stroke="#33322E" data-name="UserNotFoundError">
+<rect x="10238.0" y="295.0" height="70.0" width="169.0" data-name="UserNotFoundError"></rect>
+<path d="M10238.0 326.0 L10407.0 326.0" fill="none" data-name="UserNotFoundError"></path>
+<path d="M10238.0 357.0 L10407.0 357.0" fill="none" data-name="UserNotFoundError"></path>
+</g>
+<g transform="translate(10238, 295)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UserNotFoundError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserNotFoundError">
+<a id="../src/gql/resolvers/user-not-found.error.ts.UserNotFoundError" xlink:href="../src/gql/resolvers/user-not-found.error.ts"><text x="76.5" y="13.5" stroke="none" text-anchor="middle" data-name="UserNotFoundError">UserNotFoundError</text></a>
+
+</g>
+</g>
+<g transform="translate(10238, 326)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserNotFoundError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserNotFoundError">
+<text x="0.0" y="13.5" stroke="none" data-name="UserNotFoundError">+postId: string</text>
+
+</g>
+</g>
+<g transform="translate(10238, 357)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserNotFoundError">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UserNotFoundError">
+
+</g>
+</g>
+</g>
+<g data-name="UsersResolver">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersResolver">
+<rect x="5085.0" y="45.0" height="138.0" width="395.0" data-name="UsersResolver"></rect>
+<path d="M5085.0 76.0 L5480.0 76.0" fill="none" data-name="UsersResolver"></path>
+<path d="M5085.0 122.0 L5480.0 122.0" fill="none" data-name="UsersResolver"></path>
+</g>
+<g transform="translate(5085, 45)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersResolver">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersResolver">
+<a id="../src/gql/resolvers/users.resolver.ts.UsersResolver" xlink:href="../src/gql/resolvers/users.resolver.ts"><text x="189.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersResolver">UsersResolver</text></a>
+
+</g>
+</g>
+<g transform="translate(5085, 76)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersResolver">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersResolver">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersResolver">-usersService: UsersService</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersResolver">-postsService: PostsService</text>
+
+</g>
+</g>
+<g transform="translate(5085, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersResolver">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersResolver">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersResolver">+getUserById(): Observable&lt;User&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersResolver">+posts(): Observable&lt;Post[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersResolver">+updateUser(): Observable&lt;UpdateUserResult&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="DateScalar">
+<g fill="#eee8d5" stroke="#33322E" data-name="DateScalar">
+<rect x="10447.0" y="268.0" height="123.0" width="179.0" data-name="DateScalar"></rect>
+<path d="M10447.0 299.0 L10626.0 299.0" fill="none" data-name="DateScalar"></path>
+<path d="M10447.0 330.0 L10626.0 330.0" fill="none" data-name="DateScalar"></path>
+</g>
+<g transform="translate(10447, 268)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="DateScalar">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DateScalar">
+<a id="../src/gql/scalars/date.scalar.ts.DateScalar" xlink:href="../src/gql/scalars/date.scalar.ts"><text x="81.5" y="13.5" stroke="none" text-anchor="middle" data-name="DateScalar">DateScalar</text></a>
+
+</g>
+</g>
+<g transform="translate(10447, 299)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DateScalar">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DateScalar">
+<text x="0.0" y="13.5" stroke="none" data-name="DateScalar">+description: string</text>
+
+</g>
+</g>
+<g transform="translate(10447, 330)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DateScalar">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DateScalar">
+<text x="0.0" y="13.5" stroke="none" data-name="DateScalar">+parseValue(): Date</text>
+<text x="0.0" y="28.5" stroke="none" data-name="DateScalar">+serialize(): number</text>
+<text x="0.0" y="43.5" stroke="none" data-name="DateScalar">+parseLiteral(): Date</text>
+
+</g>
+</g>
+</g>
+<g data-name="PostsService">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsService">
+<rect x="5520.0" y="0.0" height="228.0" width="436.0" data-name="PostsService"></rect>
+<path d="M5520.0 31.0 L5956.0 31.0" fill="none" data-name="PostsService"></path>
+<path d="M5520.0 77.0 L5956.0 77.0" fill="none" data-name="PostsService"></path>
+</g>
+<g transform="translate(5520, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsService">
+<a id="../src/gql/service/posts.service.ts.PostsService" xlink:href="../src/gql/service/posts.service.ts"><text x="210.0" y="13.5" stroke="none" text-anchor="middle" data-name="PostsService">PostsService</text></a>
+
+</g>
+</g>
+<g transform="translate(5520, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsService">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsService">-postRepository: PostRepository</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsService">-commentRepository: CommentRepository</text>
+
+</g>
+</g>
+<g transform="translate(5520, 77)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsService">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsService">+findById(): Observable&lt;Post&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsService">+findAll(): Observable&lt;Post[]&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsService">+createPost(): Observable&lt;Post&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostsService">+findByAuthor(): Observable&lt;Post[]&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostsService">+findCommentsByPostId(): Observable&lt;Comment[]&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostsService">+findCommentsByPostIds(): Observable&lt;Comment[]&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostsService">+addComment(): Observable&lt;Comment&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PostsService">-mapAsModel(): Post</text>
+<text x="0.0" y="133.5" stroke="none" data-name="PostsService">-mapAsModelArray(): Post[]</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersService">
+<rect x="5996.0" y="53.0" height="123.0" width="279.0" data-name="UsersService"></rect>
+<path d="M5996.0 84.0 L6275.0 84.0" fill="none" data-name="UsersService"></path>
+<path d="M5996.0 115.0 L6275.0 115.0" fill="none" data-name="UsersService"></path>
+</g>
+<g transform="translate(5996, 53)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersService">
+<a id="../src/gql/service/users.service.ts.UsersService" xlink:href="../src/gql/service/users.service.ts"><text x="131.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersService">UsersService</text></a>
+
+</g>
+</g>
+<g transform="translate(5996, 84)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">-userRepository: UserRepository</text>
+
+</g>
+</g>
+<g transform="translate(5996, 115)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">+update(): Observable&lt;boolean&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersService">+findById(): Observable&lt;User&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersService">+findByIds(): Observable&lt;User[]&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="Comment">
+<g fill="#eee8d5" stroke="#33322E" data-name="Comment">
+<rect x="6315.0" y="57.0" height="115.0" width="139.0" data-name="Comment"></rect>
+<path d="M6315.0 88.0 L6454.0 88.0" fill="none" data-name="Comment"></path>
+<path d="M6315.0 164.0 L6454.0 164.0" fill="none" data-name="Comment"></path>
+</g>
+<g transform="translate(6315, 57)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Comment">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Comment">
+<a id="../src/gql/types/comment.model.ts.Comment" xlink:href="../src/gql/types/comment.model.ts"><text x="61.5" y="13.5" stroke="none" text-anchor="middle" data-name="Comment">Comment</text></a>
+
+</g>
+</g>
+<g transform="translate(6315, 88)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Comment">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Comment">
+<text x="0.0" y="13.5" stroke="none" data-name="Comment">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Comment">+content: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Comment">+postId: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Comment">+post: Post</text>
+
+</g>
+</g>
+<g transform="translate(6315, 164)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Comment">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Comment">
+
+</g>
+</g>
+</g>
+<g data-name="Post">
+<g fill="#eee8d5" stroke="#33322E" data-name="Post">
+<rect x="6494.0" y="27.0" height="175.0" width="202.0" data-name="Post"></rect>
+<path d="M6494.0 58.0 L6696.0 58.0" fill="none" data-name="Post"></path>
+<path d="M6494.0 194.0 L6696.0 194.0" fill="none" data-name="Post"></path>
+</g>
+<g transform="translate(6494, 27)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Post">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Post">
+<a id="../src/gql/types/post.model.ts.Post" xlink:href="../src/gql/types/post.model.ts"><text x="93.0" y="13.5" stroke="none" text-anchor="middle" data-name="Post">Post</text></a>
+
+</g>
+</g>
+<g transform="translate(6494, 58)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Post">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Post">
+<text x="0.0" y="13.5" stroke="none" data-name="Post">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Post">+title: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Post">+content: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Post">+createdAt: Date</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Post">+updatedAt: Date</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Post">+comments: Comment[]</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Post">+author: User</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Post">+authorId: string</text>
+
+</g>
+</g>
+<g transform="translate(6494, 194)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Post">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Post">
+
+</g>
+</g>
+</g>
+<g data-name="UpdateUserResult">
+<g fill="#eee8d5" stroke="#33322E" data-name="UpdateUserResult">
+<rect x="6736.0" y="72.0" height="85.0" width="165.0" data-name="UpdateUserResult"></rect>
+<path d="M6736.0 103.0 L6901.0 103.0" fill="none" data-name="UpdateUserResult"></path>
+<path d="M6736.0 149.0 L6901.0 149.0" fill="none" data-name="UpdateUserResult"></path>
+</g>
+<g transform="translate(6736, 72)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UpdateUserResult">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UpdateUserResult">
+<a id="../src/gql/types/update-result.model.ts.UpdateUserResult" xlink:href="../src/gql/types/update-result.model.ts"><text x="74.5" y="13.5" stroke="none" text-anchor="middle" data-name="UpdateUserResult">UpdateUserResult</text></a>
+
+</g>
+</g>
+<g transform="translate(6736, 103)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateUserResult">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UpdateUserResult">
+<text x="0.0" y="13.5" stroke="none" data-name="UpdateUserResult">+success: boolean</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UpdateUserResult">+message: string</text>
+
+</g>
+</g>
+<g transform="translate(6736, 149)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateUserResult">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UpdateUserResult">
+
+</g>
+</g>
+</g>
+<g data-name="User">
+<g fill="#eee8d5" stroke="#33322E" data-name="User">
+<rect x="6941.0" y="57.0" height="115.0" width="124.0" data-name="User"></rect>
+<path d="M6941.0 88.0 L7065.0 88.0" fill="none" data-name="User"></path>
+<path d="M6941.0 164.0 L7065.0 164.0" fill="none" data-name="User"></path>
+</g>
+<g transform="translate(6941, 57)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="User">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="User">
+<a id="../src/gql/types/user.model.ts.User" xlink:href="../src/gql/types/user.model.ts"><text x="54.0" y="13.5" stroke="none" text-anchor="middle" data-name="User">User</text></a>
+
+</g>
+</g>
+<g transform="translate(6941, 88)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="User">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="User">
+<text x="0.0" y="13.5" stroke="none" data-name="User">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="User">+name: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="User">+email: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="User">+posts: Post[]</text>
+
+</g>
+</g>
+<g transform="translate(6941, 164)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="User">
+<g transform="translate(8, 8)" fill="#33322E" data-name="User">
+
+</g>
+</g>
+</g>
+<g data-name="PermissionType">
+<g fill="lightgreen" stroke="#33322E" data-name="PermissionType">
+<rect x="7105.0" y="68.0" height="92.0" width="147.0" data-name="PermissionType"></rect>
+<path d="M7105.0 99.0 L7252.0 99.0" fill="none" data-name="PermissionType"></path>
+</g>
+<g transform="translate(7105, 68)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PermissionType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PermissionType">
+<a id="../src/authz/permission-type.enum.ts.PermissionType" xlink:href="../src/authz/permission-type.enum.ts"><text x="65.5" y="13.5" stroke="none" text-anchor="middle" data-name="PermissionType">PermissionType</text></a>
+
+</g>
+</g>
+<g transform="translate(7105, 99)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PermissionType">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PermissionType">
+<text x="0.0" y="13.5" stroke="none" data-name="PermissionType">READ_POSTS</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PermissionType">WRITE_POSTS</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PermissionType">DELETE_POSTS</text>
+
+</g>
+</g>
+</g>
+<g data-name="Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;">
+<rect x="7292.0" y="99.0" height="31.0" width="408.0" data-name="Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;"></rect>
+</g>
+<g transform="translate(7292, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;">
+<text x="196.0" y="13.5" stroke="none" text-anchor="middle" data-name="Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;">Request&lt;P,ResBody,ReqBody,ReqQuery,Locals&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="CanActivate">
+<g fill="#eee8d5" stroke="#33322E" data-name="CanActivate">
+<rect x="7855.0" y="99.0" height="31.0" width="111.0" data-name="CanActivate"></rect>
+</g>
+<g transform="translate(7855, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CanActivate">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CanActivate">
+<text x="47.5" y="13.5" stroke="none" text-anchor="middle" data-name="CanActivate">CanActivate</text>
+
+</g>
+</g>
+</g>
+<g data-name="Strategy">
+<g fill="#eee8d5" stroke="#33322E" data-name="Strategy">
+<rect x="8299.0" y="99.0" height="31.0" width="82.0" data-name="Strategy"></rect>
+</g>
+<g transform="translate(8299, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Strategy">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Strategy">
+<text x="33.0" y="13.5" stroke="none" text-anchor="middle" data-name="Strategy">Strategy</text>
+
+</g>
+</g>
+</g>
+<g data-name="OnModuleInit">
+<g fill="#eee8d5" stroke="#33322E" data-name="OnModuleInit">
+<rect x="8566.0" y="99.0" height="31.0" width="121.0" data-name="OnModuleInit"></rect>
+</g>
+<g transform="translate(8566, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="OnModuleInit">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OnModuleInit">
+<text x="52.5" y="13.5" stroke="none" text-anchor="middle" data-name="OnModuleInit">OnModuleInit</text>
+
+</g>
+</g>
+</g>
+<g data-name="SchemaDirectiveVisitor&lt;TArgs,TContext&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="SchemaDirectiveVisitor&lt;TArgs,TContext&gt;">
+<rect x="8744.0" y="99.0" height="31.0" width="340.0" data-name="SchemaDirectiveVisitor&lt;TArgs,TContext&gt;"></rect>
+</g>
+<g transform="translate(8744, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="SchemaDirectiveVisitor&lt;TArgs,TContext&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="SchemaDirectiveVisitor&lt;TArgs,TContext&gt;">
+<text x="162.0" y="13.5" stroke="none" text-anchor="middle" data-name="SchemaDirectiveVisitor&lt;TArgs,TContext&gt;">SchemaDirectiveVisitor&lt;TArgs,TContext&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="GqlExceptionFilter&lt;TInput,TOutput&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="GqlExceptionFilter&lt;TInput,TOutput&gt;">
+<rect x="9124.0" y="99.0" height="31.0" width="298.0" data-name="GqlExceptionFilter&lt;TInput,TOutput&gt;"></rect>
+</g>
+<g transform="translate(9124, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="GqlExceptionFilter&lt;TInput,TOutput&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="GqlExceptionFilter&lt;TInput,TOutput&gt;">
+<text x="141.0" y="13.5" stroke="none" text-anchor="middle" data-name="GqlExceptionFilter&lt;TInput,TOutput&gt;">GqlExceptionFilter&lt;TInput,TOutput&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ApolloServerPlugin&lt;TContext&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="ApolloServerPlugin&lt;TContext&gt;">
+<rect x="9574.0" y="99.0" height="31.0" width="257.0" data-name="ApolloServerPlugin&lt;TContext&gt;"></rect>
+</g>
+<g transform="translate(9574, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ApolloServerPlugin&lt;TContext&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ApolloServerPlugin&lt;TContext&gt;">
+<text x="120.5" y="13.5" stroke="none" text-anchor="middle" data-name="ApolloServerPlugin&lt;TContext&gt;">ApolloServerPlugin&lt;TContext&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="ApolloError">
+<g fill="#eee8d5" stroke="#33322E" data-name="ApolloError">
+<rect x="10167.0" y="99.0" height="31.0" width="104.0" data-name="ApolloError"></rect>
+</g>
+<g transform="translate(10167, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ApolloError">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ApolloError">
+<text x="44.0" y="13.5" stroke="none" text-anchor="middle" data-name="ApolloError">ApolloError</text>
+
+</g>
+</g>
+</g>
+<g data-name="CustomScalar&lt;T,K&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="CustomScalar&lt;T,K&gt;">
+<rect x="10451.0" y="99.0" height="31.0" width="172.0" data-name="CustomScalar&lt;T,K&gt;"></rect>
+</g>
+<g transform="translate(10451, 99)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CustomScalar&lt;T,K&gt;">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CustomScalar&lt;T,K&gt;">
+<text x="78.0" y="13.5" stroke="none" text-anchor="middle" data-name="CustomScalar&lt;T,K&gt;">CustomScalar&lt;T,K&gt;</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
