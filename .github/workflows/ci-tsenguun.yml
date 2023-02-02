@@ -29,9 +29,10 @@ jobs:
       - name: create tsuml2 file
         run: yarn create-tsuml2
       
-      - name: copy tsuml2 file
+      - name: move tsuml2 file
         run: |
-          cp ./docs/tsuml2_diagram.svg ./public/tsuml2_diagram.svg
+          mkdir -p ./public/tsuml2
+          mv ./docs/tsuml2_diagram.svg ./public/tsuml2/tsuml2_diagram.svg
 
       # Compodoc
       - name: create compodoc files
