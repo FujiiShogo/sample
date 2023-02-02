@@ -43,6 +43,15 @@ jobs:
           mkdir -p ./public/compodoc
           mv ./docs/compodoc ./public/
 
+      # SpectaQL
+      - name: create spectaql files
+        run: yarn spectaql 
+      
+      - name: move spectaql files
+        run: |
+          mkdir -p ./public/spectaql
+          mv ./docs/spectaql ./public/
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
