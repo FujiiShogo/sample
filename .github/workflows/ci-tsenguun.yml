@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - feature/ci-*  
-    paths:
-      - .github/workflows/**
-      - docs/** 
+    # paths:
+    #   - .github/workflows/**
+    #   - docs/** 
 
 jobs:
   deploy:
